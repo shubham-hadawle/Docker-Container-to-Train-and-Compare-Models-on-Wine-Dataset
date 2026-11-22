@@ -1,0 +1,12 @@
+# training outputs (keep the folder itself)
+artifacts/*
+!artifacts/.gitkeep
+
+# saved docker image
+*.tar
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store

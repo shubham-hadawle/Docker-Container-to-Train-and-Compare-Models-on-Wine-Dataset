@@ -1,0 +1,12 @@
+# keep the build context small
+artifacts/
+*.tar
+__pycache__/
+*.pyc
+.venv/
+venv/
+.git/
+.gitignore
+.DS_Store
+README.md
+docker-compose.yml

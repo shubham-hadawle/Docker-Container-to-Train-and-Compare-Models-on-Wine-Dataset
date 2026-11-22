@@ -1,0 +1,23 @@
+# Runs training first, then a prediction job that reuses the saved model.
+# Both containers share ./artifacts, so the outputs end up on the host.
+services:
+  trainer:
+    build: .
+    image: wine-lab1:v1
+    container_name: wine-trainer
+    environment:
+      CV_FOLDS: "5"
+      TEST_SIZE: "0.2"
+    volumes:
+      - ./artifacts:/app/artifacts
+
+  predictor:
+    # reuses the image built by the trainer service
+    image: wine-lab1:v1
+    container_name: wine-predictor
+    command: ["python", "predict.py", "--input", "sample_input.json"]
+    volumes:
+      - ./artifacts:/app/artifacts
+    depends_on:
+      trainer:
+        condition: service_completed_successfully
